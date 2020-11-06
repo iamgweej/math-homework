@@ -1,0 +1,136 @@
+% !TEX TS-program = pdflatex
+% !TEX encoding = UTF-8 Unicode
+
+% This is a simple template for a LaTeX document using the "article" class.
+% See "book", "report", "letter" for other types of document.
+
+\documentclass[11pt]{article} % use larger type; default would be 10pt
+
+\usepackage[utf8]{inputenc} % set input encoding (not needed with XeLaTeX)
+
+%%% Examples of Article customizations
+% These packages are optional, depending whether you want the features they provide.
+% See the LaTeX Companion or other references for full information.
+
+%%% PAGE DIMENSIONS
+\usepackage{geometry} % to change the page dimensions
+\geometry{a4paper} % or letterpaper (US) or a5paper or....
+% \geometry{margin=2in} % for example, change the margins to 2 inches all round
+% \geometry{landscape} % set up the page for landscape
+%   read geometry.pdf for detailed page layout information
+
+\usepackage{graphicx} % support the \includegraphics command and options
+
+% \usepackage[parfill]{parskip} % Activate to begin paragraphs with an empty line rather than an indent
+
+%%% PACKAGES
+\usepackage{booktabs} % for much better looking tables
+\usepackage{array} % for better arrays (eg matrices) in maths
+\usepackage{paralist} % very flexible & customisable lists (eg. enumerate/itemize, etc.)
+\usepackage{verbatim} % adds environment for commenting out blocks of text & for better verbatim
+\usepackage{subfig} % make it possible to include more than one captioned figure/table in a single float
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{exercise}
+% These packages are all incorporated in the memoir class to one degree or another...
+
+%%% Commands and Theorems
+\newcommand{\norm}[1]{\left\lVert#1\right\rVert}
+\newtheorem{lemma}{Lemma}
+
+%%% HEADERS & FOOTERS
+\usepackage{fancyhdr} % This should be set AFTER setting up the page geometry
+\pagestyle{fancy} % options: empty , plain , fancy
+\renewcommand{\headrulewidth}{0pt} % customise the layout...
+\lhead{}\chead{}\rhead{}
+\lfoot{}\cfoot{\thepage}\rfoot{}
+
+%%% SECTION TITLE APPEARANCE
+\usepackage{sectsty}
+\allsectionsfont{\sffamily\mdseries\upshape} % (See the fntguide.pdf for font help)
+% (This matches ConTeXt defaults)
+
+%%% ToC (table of contents) APPEARANCE
+\usepackage[nottoc,notlof,notlot]{tocbibind} % Put the bibliography in the ToC
+\usepackage[titles,subfigure]{tocloft} % Alter the style of the Table of Contents
+\renewcommand{\cftsecfont}{\rmfamily\mdseries\upshape}
+\renewcommand{\cftsecpagefont}{\rmfamily\mdseries\upshape} % No bold!
+
+%%% END Article customizations
+
+%%% The "real" document content comes below...
+
+\title{Homework 1}
+\author{Alon Ben-Tsur}
+%\date{} % Activate to display a given date or no date (if empty),
+         % otherwise the current date is printed 
+
+\begin{document}
+\maketitle
+
+\begin{Exercise}
+Prove that any finite dimensional normed space is a Banach space.
+\end{Exercise}
+
+\begin{lemma}
+Let $V$ be a linear space. Then the notion of completness carries between equivalent norms.
+\end{lemma}
+Let $V$ be a linear space, and let $\norm{ \cdot }_{1}$ and $\norm{ \cdot }_{2}$ be equivalent norms, with $c \norm{ \cdot }_{2} \leq \norm{ \cdot }_{1}  \leq C \norm{ \cdot }_{2}$. Then a sequence $\left\{x_n\right\}$ converges in $\norm{\cdot} _{1}$ if and only if it converges in $\norm{\cdot} _{2}$. Indeed, if for some $n$ we have $\norm{ x_n - x } _{2} \leq C^{-1}\varepsilon$, then $\norm{ x_n - x } _{1} \leq \varepsilon$. The other direction is the same with $c^{-1}$. It's easy to see that the same is true for the notion of Cauchy sequences. Therefore, the notion of completeness carries between equivalent norms.
+
+
+\begin{Answer}
+Take a linear isomorphism $T: V \to W = \mathbb{F}^n$, and look at $W$ as a normed space under the norm $\norm{x}_{T} = \norm{T^{-1}\left( x \right)}$. We'll call that normed space $W_T$, and use $W_2$ when referring to the euclidean norm. We know that all the norms on $W$ are equivalent, which means that is $W_T$ is complete, since all euclidean spaces $\mathbb{R}^{n}$ and $\mathbb{C}^{n}$ are. $W_T$ is clearly isometric to $V$, and therefore $V$ is a banach space.
+\end{Answer}
+
+\begin{Exercise}
+Show that:
+\begin{enumerate}
+\item If $p \geq q \geq 1$ then $\ell_q \subset \ell_p$.
+\item If $p > q \geq 1$ then theres $a \in \ell_p$ such that $x \notin \ell_q$.
+\end{enumerate}
+\end{Exercise}
+
+
+\begin{Answer}
+Take $p \geq q \geq 0$, and let $a = \left\{a_n\right\}$ be a sequence with $\norm{a}_q < \infty$. Then we must have $a_n \to 0$ and so for large enough $n$ we have $a_n < 1$. So $a_{n}^{p} \leq a_{n}^{q}$ and so $\norm{a}_p < \infty$. Therefore $\ell_q \subset \ell_p$.
+
+Let $p > q \geq 1$, and set $\varepsilon = \frac{p - q}{2} > 0$. Consider $a_n = n^{-\left(p + \varepsilon + 1\right)}$, and $a=\left\{a_n\right\}$. We have that $a_{n}^{p} = n^{-\left(1+\varepsilon\right)}$, and so $\norm{a}_p < \infty$. However, $a_{n}^{q} = n^{-\left(1 - \varepsilon\right)}$, which means $\norm{a}_q = \infty$. Therefore, we have that $a \in \ell_p$, but $a \notin \ell_q$.
+\end{Answer}
+
+\begin{Exercise}
+Show that for all $x \in \mathbb{R}^2$, $\norm{x}_p \to \norm{x}_{\infty}$ when $p \to \infty$.
+\end{Exercise}
+
+\begin{Answer}
+Take $v = \left( x, y\right) \in \mathbb{R}^2$, and suppose without the loss of generality that $x > y \geq 0$, since if $x = y$ we have that $\norm{v}_p = 2^{\frac{1}{p}} \left| x \right|$, and we have that $\norm{v}_p \to \left| x \right| =\norm{v}_{\infty}$
+
+So, we have $\norm{v}_p = x\left( 1 + t^p \right)^{\frac{1}{p}}$ for $t = \frac{y}{x} < 1$. Since $\frac{1}{p} \to 0$ and $1 + t^p \to 1$, we have that $\left(1 + t^p\right)^\frac{1}{p} \to 1$, and so $\norm{v}_p \to x = \norm{v}_{\infty}$.
+\end{Answer}
+
+\begin{Exercise}
+Let $E$ be a vector space and $E_1$ be a subspace of $E$. Prove that any two cosets in the quotient space $E/E_1$ either concide or they are disjoint sets.
+\end{Exercise}
+
+\begin{Answer}
+Take $\left[x\right] = x + E_1$, $\left[y\right] = y + E_1$ to be two such cosets. Suppose that $u \in E$ with $u \in \left[x\right] \cap \left[y\right]$. Then for some $e_1, e_2 \in E_1$ we have that $u = x + e_1 = y + e_2$, that is, $x = y + e_2 - e_1 = y - e$ for $e = e_2 - e_1 \in E_1$. Then for all $v \in \left[ x \right]$ with $v = x + e'$ we have that $v = y - e' + e \in \left[y\right]$, and so $\left[x\right] \subset \left[y\right]$. By symmetry, we conclude that either $\left[x\right] \cap \left[y\right] = \emptyset$ or $\left[x\right] = \left[y\right]$.
+\end{Answer}
+
+\begin{Exercise}
+Show that $\text{codim}_{E}E_1 = n$ iff there exist $x_1, \dots, x_n$ linearly independent relative to $E_1$ such that for every $x \in E$ there exists a unique set of numbers $a_1, \dots, a_n$ and a unique vector $y \in E_1$ such that $x = \sum_{i = 1}^{n}a_{i}x_{i} + y$. Moreover, cosets $\left[ x_1 \right], \dots, \left[ x_n \right]$ of such vectors are a basis for $E/E_1$.
+\end{Exercise}
+
+\begin{Answer}
+Take a basis $\left[ x_1 \right], \dots, \left[ x_n \right]$ to $E/E_1$. We can find unique $a_i$ such that $\sum_{i = 1}^{n}a_i\left[ x_i \right] = \left[ x \right]$, that is, there is a unique $y \in E_1$ (it has to be $x - \sum_{i = 1}^{n}a_{i}x_{i}$) with $\sum_{i = 1}^{n}a_i x_i + y = x$. If we take $x = 0$ we get that $x_i$ are linearly independent in $E$ relactive to $E_1$.
+
+For the other direction. Take linearly independent $x_i$ relative to $E_1$, such that for each $x\in E$ there exist a unique set numbers $a_i$ and a unique $y \in E_1$ such that $x = \sum_{i = 1}^{n} a_i x_i + y$.  Its clear that $\left[ x_i \right]$ span $E/E_1$ since $\sum_{i = 1}^{n} a_i \left[x_i \right] = \left[ x \right]$, and it is left to show that $\left[ x_i \right]$ are linearly independent. Indeed, suppose $\sum a_i \left[ x_i \right] = \left[ 0 \right]$. Then we can take a $y \in E_1$ with $\sum_{i = 1}^{n} a_i x_i = y$, therefore $a_i = 0$. We conclude that $\left[ x_i \right]$ are linearly independent in $E/E_1$ and so they are also a basis for $E/E_1$, and $\text{codim}_{E}E_1 = n$.
+\end{Answer}
+
+\begin{Exercise}
+\end{Exercise}
+
+\begin{Answer}
+Define a linear map $T: \hat{c} \to \mathbb{C}^2$, sending $\left\{x_n\right\}$ to $\left(\lim_{n\to -\infty} x_n, \lim_{n\to +\infty} x_n\right)$. We have that $T\equiv0$ on $\hat{c}_0$, and so we get a linear map $\hat{c} / \hat{c}_0 \to \mathbb{C}^2$. It's obviously onto, since for a pair $\left( x, y \right) \in \mathbb{C}^2$ we can look at the sequence taking $x$ for negative $n$ and $y$ for positive $n$. It's one-to-one since if $T x = 0$ we have that $ x_n \to 0 $ when $n \to \pm \infty $, so $\left\{ x_n \right\} \in \hat{c}_0$. Therefore $T$ is an isomorphism and $\dim \hat{c} / \hat{c}_0 = 2$.
+\end{Answer}
+
+\end{document}

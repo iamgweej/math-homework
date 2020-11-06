@@ -1,0 +1,255 @@
+% !TEX TS-program = pdflatex
+% !TEX encoding = UTF-8 Unicode
+
+% This is a simple template for a LaTeX document using the "article" class.
+% See "book", "report", "letter" for other types of document.
+
+\documentclass[11pt]{article} % use larger type; default would be 10pt
+
+\usepackage[utf8]{inputenc} % set input encoding (not needed with XeLaTeX)
+
+%%% Examples of Article customizations
+% These packages are optional, depending whether you want the features they provide.
+% See the LaTeX Companion or other references for full information.
+
+%%% PAGE DIMENSIONS
+\usepackage{geometry} % to change the page dimensions
+\geometry{a4paper} % or letterpaper (US) or a5paper or....
+% \geometry{margin=2in} % for example, change the margins to 2 inches all round
+% \geometry{landscape} % set up the page for landscape
+%   read geometry.pdf for detailed page layout information
+
+\usepackage{graphicx} % support the \includegraphics command and options
+
+% \usepackage[parfill]{parskip} % Activate to begin paragraphs with an empty line rather than an indent
+
+%%% PACKAGES
+\usepackage{booktabs} % for much better looking tables
+\usepackage{array} % for better arrays (eg matrices) in maths
+\usepackage{paralist} % very flexible & customisable lists (eg. enumerate/itemize, etc.)
+\usepackage{verbatim} % adds environment for commenting out blocks of text & for better verbatim
+\usepackage{subfig} % make it possible to include more than one captioned figure/table in a single float
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{exercise}
+% These packages are all incorporated in the memoir class to one degree or another...
+
+%%% Commands and Theorems
+\newcommand{\norm}[1]{\left\lVert#1\right\rVert}
+\newtheorem{lemma}{Lemma}
+
+%%% HEADERS & FOOTERS
+\usepackage{fancyhdr} % This should be set AFTER setting up the page geometry
+\pagestyle{fancy} % options: empty , plain , fancy
+\renewcommand{\headrulewidth}{0pt} % customise the layout...
+\lhead{}\chead{}\rhead{}
+\lfoot{}\cfoot{\thepage}\rfoot{}
+
+%%% SECTION TITLE APPEARANCE
+\usepackage{sectsty}
+\allsectionsfont{\sffamily\mdseries\upshape} % (See the fntguide.pdf for font help)
+% (This matches ConTeXt defaults)
+
+%%% ToC (table of contents) APPEARANCE
+\usepackage[nottoc,notlof,notlot]{tocbibind} % Put the bibliography in the ToC
+\usepackage[titles,subfigure]{tocloft} % Alter the style of the Table of Contents
+\renewcommand{\cftsecfont}{\rmfamily\mdseries\upshape}
+\renewcommand{\cftsecpagefont}{\rmfamily\mdseries\upshape} % No bold!
+
+%%% END Article customizations
+
+%%% The "real" document content comes below...
+
+\title{Homework 2}
+\author{Alon Ben-Tsur}
+%\date{} % Activate to display a given date or no date (if empty),
+         % otherwise the current date is printed 
+
+\begin{document}
+\maketitle
+
+\begin{Exercise}
+Prove that $\ell_\infty$ is complete.
+\end{Exercise}
+
+\begin{Answer}
+Take sequences $a^i = \left\{a^i_n\right\}_{n=1}^\infty$ such that $\left\{a^i\right\}_{i = 1}^\infty$ form a Cauchy sequence in $\ell_\infty$. That is, for any $\varepsilon > 0$ there exists $N >0$ such that for all $i,j > N$, we have that $\norm{ a^i - a^j } _\infty = \sup_n\left|a^i_n - b^i_n\right| < \varepsilon$.
+
+Fix $n$, and consider the sequence $\left\{ a^i_n \right\}_{i=1}^\infty$. For large enough $i, j$ we have that:
+\[ \left| a^i_n - a^j_n  \right| < \sup_n \left| a^i _n- a^j_n\right| < \varepsilon \]
+and therefore $\left\{ a^i_n \right\}_{i=1}^\infty$ is a Cauchy sequence of scalars, so it has a limit, which we'll call $a_n$.
+
+Consider the sequence $a = \left\{a_n = \lim_{i\to\infty}a^i_n\right\}_{n = 1}^\infty$. We'll prove that $a = \lim_{i\to\infty}a^i$ in $\ell_\infty$
+
+Take $\varepsilon > 0$, so for large enough $i, j$ and for all $n$ we have that: $ \left|a^i_n - a^j_n\right| < \frac{\varepsilon}{2}$, and letting $j \to \infty$ we have that: $\left|a^i_n - a_n \right| \leq \frac{\varepsilon}{2}$ for all $n$, that is, $\norm{ a^i - a } _\infty < \varepsilon$.
+
+We conclude that $a^i \to a$ in $\ell_\infty$.
+\end{Answer}
+
+\begin{Exercise}
+Let $X$ be a normed space and $X_0$ a closed subspace of $X$. We consider the quotient space $X/X_0$. Show that $\norm{\left[x\right]} = \inf_{y\in X_0}\norm{x - y}$ is a norm.
+\end{Exercise}
+
+\begin{Answer}
+Firstly, lets show that it's well defined. Indeed, if $\left[x\right] = \left[z\right]$, then $z = x + y_0$ for some $y_0 \in X_0$, and so we have that:
+\[ \norm{\left[ x \right]} = \inf_{y\in X_0}\norm{x -y} = \inf_{y - y_0\in X_0}\norm{x + y_0 - y} = \inf_{y \in X_0 + y_0}\norm{z - y} \]
+Since $X_0$ is a subspace and $y_0 \in X_0$ we have that $y_0 + X_0 = X_0$ and we conclude that $\norm{\left[x\right]} = \norm{\left[z\right]}$.
+
+Now, take $0 \neq \lambda \in \mathbb{F}$. We have that $\lambda^{-1} X_0 = X_0$, since $X_0$ is a subspace, and therefore:
+\[ \norm{\lambda \left[ x \right]} = \norm{ \left[ \lambda x \right]} = \inf_{y\in X_0} \norm{ \lambda x -y} = \inf_{y \in \lambda^{-1} X_0} \left| \lambda \right| \norm{x -y} = \left| \lambda \right| \inf_{y \in X_0} \norm{x - y} = \left| \lambda \right| \norm{\left[x \right]} \]
+For $0$ we have that $\norm{\left[0\right]} = 0$ since $0 \in X_0$.
+
+Now, since $X_0$ is closed under addition and $0 \in X_0$, we have that $\inf_{y\in X_0}\norm{x + z - y} = \inf_{y,w\in X_0}\norm{x + z - y - w}$, and therefore we have that:
+
+\begin{equation}
+\begin{split}
+\norm{\left[x + z\right]} & = \inf_{y\in X_0}\norm{x + z - y} \\
+& = \inf_{y,w\in X_0}\norm{x + z - y - w} \\
+& \leq \inf_{y,w\in X_0} \left\{ \norm{x - y} + \norm{z - w}\right\} \\
+& = \inf_{y\in X_0}\norm{x-y} + \inf_{w \in X_0}\norm{z-w} \\
+& = \norm{\left[x\right]} + \norm{\left[z\right]}
+\end{split}
+\end{equation}
+
+So the triangle ineqaulity holds.
+
+Now, suppose $\norm{\left[x\right]}  = \inf_{y \in X_0}\norm{x - y} =0$. Take a sequence $y_n \in X_0$ with $\norm{x - y_n} \to 0$, that is, $y_n \to x$. We assumed that $X_0$ is closed, so we conclude that $x\in X_0$ and so $\left[x\right] = \left[0\right]$.
+
+\end{Answer}
+
+\begin{Exercise}
+Recall the definition of extreme points in the unit ball from the last recitation.
+
+I'm assuming the base field is $\mathbb{R}$.
+\begin{enumerate}
+\begin{item}
+Let $e_n \in \ell_1$ be a vector of zeros but the n-th coordinate which is equal to $1$. Show that the set of extreme points on the unit ball in $\ell_1$ is $\left\{e_n\right\}_{n=1}^\infty \cup \left\{-e_n\right\}_{n=1}^\infty$.
+\end{item}
+\begin{item}
+Consider the space $C\left[0,1\right]$ equipped with the $\sup$ norm. Show that the extreme points on the unit ball in $\left( C\left[0,1\right], \norm{\cdot}_\infty\right)$ are the constant functions $\pm 1$.
+\end{item}
+\end{enumerate}
+\end{Exercise}
+
+\begin{Answer}
+\begin{enumerate}
+\begin{item}
+Take an element $x =\left\{x_j\right\}_{j=1}^\infty \in B\left(\ell_1\right)$ and suppose it's an extreme point. Assume that $x_i, x_j \neq 0$. Take $\varepsilon = \frac{1}{2} \min\left\{\left|x_i\right|, \left|x_j\right|\right\} > 0, s_i = \text{sgn}\left(x_i\right), s_j = \text{sgn}\left(x_j\right)$. Take $a = x + s_i\varepsilon - s_j\varepsilon$, and $b = x - s_i\varepsilon + s_j\varepsilon$. Then $\norm{x} = \norm{a} = \norm{b}$, and $x = \frac{1}{2}\left(a + b\right)$. Since $x$ is extreme, we have that $a = b$ and so $i =j$.
+Now, if $\left|x_i\right| = \lambda< 1$, then $x = \pm \lambda e_i + \left(1-\lambda\right)\cdot 0$, depending on the sign of $x_i$.
+We conclude that $x = e_i$.
+
+All that is left to show is the $e_n$ and $-e_n$ are extreme. Indeed, if $\pm e_n = \lambda x + \left(1-\lambda\right) y$, then $\pm 1 = \lambda x_n + \left(1 -\lambda\right) y_n$. So $1 = \left|\lambda x_n + \left(1 - \lambda \right)y_n\right| \leq \lambda \left|x_n\right| + \left(1-\lambda\right)\left|y_n\right|$. If either of $\left|x_n\right|, \left|y_n\right|$ is $< 1$, we have that $1 < 1$, which is a contradiciton. Therefore, $x_n, y_n = \pm1$ and so $x = e_n$ or $y = e_n$, and we conclude that $e_n$ is extreme.
+
+Finally, the set of extreme points in $B\left(\ell_1\right)$ is exactly $\left\{\pm e_n\right\}_{n=1}^\infty$
+\end{item}
+\begin{item}
+Firstly, for constants $a < b$ we'll define the triangle function:
+
+\[
+	t_{a,b}\left(x\right) = 
+\begin{cases}
+0, & x < a \\
+2\cdot\frac{x - a}{b - a}, & a \leq x < \frac{a + b}{2} \\
+2\cdot\frac{b - x}{b - a}, & \frac{a + b}{2} \leq x < b \\
+0, & b \leq x
+\end{cases}
+\]
+
+It's clearly continuous.
+
+Now, take a function $f \in C\left[0,1\right]$ with $\sup\left|f\right| \leq 1$. Suppose $f \not \equiv \pm 1$. Take a point $z \in \left(0,1\right)$ with $f\left(z\right) \neq \pm 1$, that is, $\left|f\left(z\right)\right| < 1$. So for $\varepsilon = \frac{1}{2}\left(1 - \left|f\left(z\right)\right|\right)$, we have some $\delta > 0$ such that $\sup_{x\in\left(z-\delta, z+\delta\right)}\left|f\left(x\right)-f\left(z\right)\right| < \varepsilon$, since $f$ is continuous.
+
+Consider the triangle function $g = \varepsilon t_{z - \delta, z + \delta}$. We have that $f \pm g = f$ outside of $\left(z -\delta, z + \delta\right)$, and inside the domain we have that:
+
+\[ \left|f\left(x\right) \pm g\left(x\right)\right| \leq \left| f\left(x\right) - f\left(z\right) \right| + \left| f\left(z\right)\right| + \left| \pm g\left(x\right) \right| < 2\varepsilon + \left|f\left(z\right)\right| < 1\]
+
+and so $f+g, f-g \in B\left(C\left[0, 1\right]\right)$. But we have that $f = \frac{1}{2}\left(f+g + f - g\right)$, so $f$ isn't extreme.
+
+All that is left is to show that $\pm1$ are extreme. Indeed, suppose $\pm1 \equiv \lambda f + \left( 1 - \lambda\right)g$. Then at every point we have that:
+
+\[ 1 = \left|\lambda f\left(x\right)  + \left(1 - \lambda\right)g\left(x\right)\right| \leq \lambda \left| f\left(x\right) \right| + \left(1 - \lambda\right) \left|g\left(x\right)\right| \] 
+
+And if $\left|f\left(x\right)\right|$ or $\left|g\left(x \right)\right|$ are $< 1$, then this is a strong inequality. We conclude that $\left|f\right|, \left|g\right| \equiv 1$, and by continuity, this means that $f,g \equiv \pm1$.
+\end{item}
+\end{enumerate}
+\end{Answer}
+
+\begin{Exercise}
+Let $X$ be a linear space and $B \subset X$ some set. We assume that:
+\begin{enumerate}
+\item $B$ is convex.
+\item If $x\in B$ then $\alpha x\in B$ for $\left|\alpha\right|\leq1$.
+\item For every $0\neq v\in X$ it holds that $B\cap\left\{\lambda v :\lambda >0\right\}= \left(0,u\right]$ where $0\neq u\in X$.
+\end{enumerate}
+Show that there exists some norm on $X$ such that the set $B$ is its unit ball.
+\end{Exercise}
+
+\begin{Answer}
+For a vector $0\neq v \in X$ we'll set $R_v = \left\{\lambda v : \lambda >0\right\}$. For each $0\neq v \in X$, set $u_v$ to be the unique $u \in B$ with $B \cap R_v = \left(0,u\right]$. Since $u_v = \lambda v$ for some $\lambda > 0$, we can set $\norm{v} =  \lambda^{-1}$, so by definition $v = \norm{v}u_v$. We also set $\norm{0} = 0$. We'll denote the set of all $u$ with $\norm{u} = 1$ by $S$.
+
+It's clear that $\norm{\cdot}$ is positive definite.
+
+Take $r > 0, 0\neq v\in X$. We have that, by definition, $\norm{rv}\cdot u_{rv} = rv$. Since $R_v = R_{rv}$, we can see that $u_{rv} = u_v$. So we conclude that:
+\[ \frac{\norm{rv}}{r} \cdot u_v = v = \norm{v} u_v \]
+So $\norm{rv}= r\norm{v}$.
+
+Now, take $\left|\alpha\right| = 1$, and $u \in S$. We know that $w =\alpha u \in B$. Consider $u_w \in S$. Since $w \in R_w \cap B$, we know that $u_w = tw$ for $t \geq 1$. Since $\left|\alpha\right|^{-1} = 1$, we have that $\alpha^{-1}u_w = \alpha^{-1}\alpha tu = tu \in B$. Since $tu \in B\cap R_u$, we must have $t \leq 1$. We conclude that $t = 1$ and $w = u_w$, that is, $w \in S$.
+
+Take a vector $0 \neq v \in X$ and a scalar $\left|\alpha\right| = 1$. Since $\alpha u_v \in R_{\alpha v} \cap S$, we know that $\alpha u_v = u_{\alpha v}$. We can conclude that $\alpha v = \norm{\alpha v} u_{\alpha v} = \norm{\alpha v} \alpha u_v$, and therefore $v = \norm{\alpha v} u_v = \norm{v} u_v$. Finally, $\norm{\alpha v} = \norm{v}$.
+
+Now, take a vector $0 \neq v \in X$ and  $\beta \neq 0$ arbitrary, and write $\beta = \alpha r$ where $r >0$ and $\left|\alpha\right| = 1$. We have that:
+\[ \norm{\beta v} = \norm{r\alpha v} = r\norm{\alpha v} = r\norm{v} = \left|\beta\right| \norm{v} \]
+So we have absolute homogeneity, when the result is clear for either $v = 0$ or $\beta = 0$.
+
+Now, take $0 \neq v,w \in X$. By definition, $\norm{v + w}u_{v + w} = v + w = \norm{v}u_v +\norm{w}u_w$. That means that:
+\[ u_{v+w} = \frac{\norm{v}}{\norm{v + w}}u_v  + \frac{\norm{w}}{\norm{v + w}}u_w \]
+
+Now, assume by contradiction that $\norm{v +w} > \norm{v} + \norm{w}$, and set $\varepsilon = 1 - \frac{\norm{v} + \norm{w}}{\norm{v+w}} > 0$. Then we have that the following is a convex combination of elements in $B$:
+\[ \frac{\norm{v}}{\norm{v + w}}u_v + \frac{\norm{w}}{\norm{v+w}}u_w + \varepsilon u_{v+w} = \left(1+\varepsilon\right)u_{v+w}\]
+Since $B$ is convex, we have that $\left(1+\varepsilon\right)u_{v+w} \in B$. So $(1+\varepsilon)u_{v+w} \in B \cap R_{v+w} = \left(0, u_{v+w}\right]$, which is a contradiction. We conclude that $\norm{v + w} \leq \norm{v} + \norm{w}$.
+
+Finally, the triangle inequality holds, when its obvious for $v =0$ or $w =0$.
+
+Now, for each $v \in B$ it's clear from the definition that $\norm{v} \leq 1$ (since it's in $B\cap R_v = \left(0, u_v\right]$), and if $\norm{v} > 1$ then $v \notin \left(0, u_v\right]$, and since $v \in R_v$ we must have $v \notin B$.
+
+We conclude that $\norm{\cdot}$ is a norm and that's $B$ is its unit ball.
+\end{Answer}
+
+\begin{Exercise}
+Consider $\ell _p$ spaces. Prove tthat $\norm{v}_q \leq \norm{v} _p$ for every $1 \leq p \leq q$.
+\end{Exercise}
+
+\begin{lemma}
+For all $a_1, \dots, a_n \geq 0$ and $0 < t <1$ we have that $\sum_{i=1}^n a_i^t \leq \left( \sum_{i=1}^n a_i \right)^t$.
+\end{lemma}
+Consider the function $f\left(x\right) = \left(1 + x\right)^{t} - x^t $ on $\left[0,1\right)$, for some $t\in\left(0,1\right)$.
+
+We have that $f'\left(x\right) = t\left(1 +x \right)^{t-1} - tx^{t-1}$. Since $z \mapsto z^{t-1}$ is decreasing on $\left(0, \infty\right)$, we have that $\left(1 + x\right)^{t-1} < x^{t-1}$ for $x \in \left(0,1\right)$, and so:
+\[ f'\left(x\right) = t\left(\left(1 + x\right)^{t-1} - x^{t-1}\right) < 0\]
+So $f$ is decreasing in $\left[0,1\right)$, and we conclude that $f\left(0\right) = 1 > f\left(x\right) = \left(1 + x\right)^t - x^t$  for all $x \in \left(0, 1\right)$, that is:
+\[ \left(1 + x\right)^t < 1 + x^t \]
+
+For $0 < a < b$ we get that $\left(1 + \frac{a}{b}\right)^t < 1 + \frac{a^t}{b^t}$, that is, $\left(a + b\right)^t < a^t + b^t$. If we weaken the inequalities $0 \leq a \leq b$, the inequality weakens to $\left(a + b\right)^t \leq a^t + b^t$ trivially.
+
+Now, by induction, assume we proved that for all $x_1, \dots, x_n \geq 0$ we have that $\left( \sum_{i=1}^{n} x_i \right)^t \leq \sum_{i=1}^{n} x_i^t$. For $n+1$ we have that:
+
+\begin{equation}
+\begin{split}
+\left(\sum_{i=1}^{n+1} x_i \right)^t & = \left(x_{n+1} + \sum_{i=1}^{n} x_i\right)^t \\
+& \leq x_{n+1}^t +\left(\sum_{i=1}^n x_i\right)^t \\
+& \leq x_{n+1}^t +\sum_{i=1}^n x_i^t \\
+& = \sum_{i=1}^{n+1} x_i^t
+\end{split}
+\end{equation}
+which completes the proof.
+
+\begin{Answer}
+Take $x_1, \dots x_n \geq 0$ and $1 \leq p \leq q$. Then we have that:
+
+\[ \left(\sum_{i=1}^n x_i^q\right)^{\frac{p}{q}} \leq \sum_{i=1}^{n} x_i^{q\cdot\frac{p}{q}}  = \sum_{i=1}^{n} x_i ^p \]
+
+Taking $n \to \infty$, we get that $\norm{v}_q \leq \norm{v}_p$.
+\end{Answer}
+
+\end{document}

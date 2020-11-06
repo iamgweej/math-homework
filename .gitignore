@@ -1,0 +1,5 @@
+# TexWorks
+*.pdf
+*.gz
+*.aux
+*.log
