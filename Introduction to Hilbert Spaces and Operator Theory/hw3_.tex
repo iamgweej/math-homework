@@ -1,0 +1,212 @@
+% !TEX TS-program = pdflatex
+% !TEX encoding = UTF-8 Unicode
+
+% This is a simple template for a LaTeX document using the "article" class.
+% See "book", "report", "letter" for other types of document.
+
+\documentclass[11pt]{article} % use larger type; default would be 10pt
+
+\usepackage[utf8]{inputenc} % set input encoding (not needed with XeLaTeX)
+
+%%% Examples of Article customizations
+% These packages are optional, depending whether you want the features they provide.
+% See the LaTeX Companion or other references for full information.
+
+%%% PAGE DIMENSIONS
+\usepackage{geometry} % to change the page dimensions
+\geometry{a4paper} % or letterpaper (US) or a5paper or....
+% \geometry{margin=2in} % for example, change the margins to 2 inches all round
+% \geometry{landscape} % set up the page for landscape
+%   read geometry.pdf for detailed page layout information
+
+\usepackage{graphicx} % support the \includegraphics command and options
+
+% \usepackage[parfill]{parskip} % Activate to begin paragraphs with an empty line rather than an indent
+
+%%% PACKAGES
+\usepackage{booktabs} % for much better looking tables
+\usepackage{array} % for better arrays (eg matrices) in maths
+\usepackage{paralist} % very flexible & customisable lists (eg. enumerate/itemize, etc.)
+\usepackage{verbatim} % adds environment for commenting out blocks of text & for better verbatim
+\usepackage{subfig} % make it possible to include more than one captioned figure/table in a single float
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage[lastexercise]{exercise}
+% These packages are all incorporated in the memoir class to one degree or another...
+
+%%% Commands and Theorems
+\newcommand{\norm}[1]{\left\lVert#1\right\rVert}
+\newcommand{\abs}[1]{\left|#1\right|}
+\newcommand{\inpr}[2]{\left<#1, #2\right>}
+\newtheorem{lemma}{Lemma}
+
+%%% HEADERS & FOOTERS
+\usepackage{fancyhdr} % This should be set AFTER setting up the page geometry
+\pagestyle{fancy} % options: empty , plain , fancy
+\renewcommand{\headrulewidth}{0pt} % customise the layout...
+\lhead{}\chead{}\rhead{}
+\lfoot{}\cfoot{\thepage}\rfoot{}
+
+%%% SECTION TITLE APPEARANCE
+\usepackage{sectsty}
+\allsectionsfont{\sffamily\mdseries\upshape} % (See the fntguide.pdf for font help)
+% (This matches ConTeXt defaults)
+
+%%% ToC (table of contents) APPEARANCE
+\usepackage[nottoc,notlof,notlot]{tocbibind} % Put the bibliography in the ToC
+\usepackage[titles,subfigure]{tocloft} % Alter the style of the Table of Contents
+\renewcommand{\cftsecfont}{\rmfamily\mdseries\upshape}
+\renewcommand{\cftsecpagefont}{\rmfamily\mdseries\upshape} % No bold!
+
+%%% END Article customizations
+
+%%% The "real" document content comes below...
+
+\title{Homework 3}
+\author{Alon Ben-Tsur}
+%\date{} % Activate to display a given date or no date (if empty),
+         % otherwise the current date is printed 
+
+\begin{document}
+\maketitle
+
+\begin{Exercise}
+\begin{enumerate}
+\item Show that $\left(\mathbb{R}^2, \norm{\cdot}_1 \right)$ and $\left(\mathbb{R}^2, \norm{\cdot}_\infty \right)$ are isometric.
+\item Prove that an isometry maps extreme points to extreme points.
+\item Show that $\left(\mathbb{R}^3, \norm{\cdot}_1 \right)$ and $\left(\mathbb{R}^2, \norm{\cdot}_\infty \right)$ are not isometric.
+\end{enumerate}
+\end{Exercise}
+
+\begin{Answer}
+\begin{enumerate}
+\begin{item}
+Consider the map $T: \left(x, y\right) \mapsto \frac{1}{2}\left(x + y, x - y\right)$ from $\left(\mathbb{R}^2, \norm{\cdot}_1 \right)$ to $\left(\mathbb{R}^2, \norm{\cdot}_\infty \right)$. It's clearly linear and onto.
+
+Now, suppose $\abs{x} \geq \abs{y}$. If $x \geq 0$ we have that:
+\[ \norm{Tv}_\infty = \frac{1}{2}\abs{x + y} + \frac{1}{2}\abs{x-y} = \frac{1}{2}\left(x + y\right) + \frac{1}{2}\left(x - y\right) = x = \norm{v}_1 \]
+
+When $x < 0$, we have that:
+\[ \norm{Tv}_\infty = \frac{1}{2}\abs{x + y} + \frac{1}{2}\abs{x-y} = -\frac{1}{2}\left(x + y\right) + -\frac{1}{2}\left(x - y\right) = -x = \norm{v}_1 \]
+
+When $\abs{y} \geq \abs{x}$ we can reduce to the first case by composing with the isometry $\left(x,y\right) \mapsto \left(y,x\right)$.
+
+We conclude that $T$ is an isometry and so $\left(\mathbb{R}^3, \norm{\cdot}_1 \right)$ and $\left(\mathbb{R}^3, \norm{\cdot}_1\infty \right)$ are isometric.
+\end{item}
+\begin{item}
+Take an isometry $T: X\to Y$ and an extreme point $x\in X$. First of all $\norm{Tx} = \norm{x} \leq 1$, so $Tx$ is in the unit ball in $Y$. Take $y_1, y_2 \in B\left(Y\right)$ and $\lambda \in \left(0, 1\right)$ with $\lambda y_1 + \left(1 - \lambda\right)y_2 = Tx$. Then $\norm{T^{-1}y_i} = \norm{y_i} \leq 1$, so $T^{-1}y_1, T^{-1}y_2 \in B\left(X\right)$. Since $T$ is linear, we have that $\lambda T^{-1}y_1 + \left(1-\lambda\right)T^{-1}y_2 = x$, so $T^{-1}y_1 = T^{-1}y_2$ and finally $y_1 = y_2$. We conclude that $Tx$ is extreme.
+\end{item}
+
+\begin{item}
+There are six extreme points in $\left(\mathbb{R}^3, \norm{\cdot}_1 \right)$, namely $\pm e_i$ for $i=1,2,3$. In the meantime, there are eight extreme points in $\left(\mathbb{R}^3, \norm{\cdot}_\infty \right)$, those being $\pm e_i \pm e_j$ for $i,j = 1,2,3, i\neq j$. Therefore, there cant be a one-to-one mapping between $\left(\mathbb{R}^3, \norm{\cdot}_1 \right)$ and $\left(\mathbb{R}^3, \norm{\cdot}_\infty \right)$ mapping extreme points to extreme points, and in particual no isometries between those spaces can exist.
+\end{item}
+\end{enumerate}
+\end{Answer}
+
+\begin{Exercise}
+Prove that a normed space is complete if and only if for every sequence of vectors $x_n$ such that $\sum_n \norm{x_n} < \infty$ it follows that $\sum_n x_n < \infty$.
+\end{Exercise}
+
+\begin{Answer}
+Assume $X$ is a complete normed space and take a sequence of vectors $x_n$ such that the series $\sum_n \norm{x_n}$ converges. Then by Cauchy's criteria, we know that for every $\varepsilon > 0$ there exists some $N > 0$ such that for all $m > n > N$ we have that $\sum_{k=n}^m \norm{x_k} < \varepsilon$. From the triangle ineqaulity, we have that $\norm{\sum_{k=n}^m x_k} < \varepsilon$, so the sequence $S_n = \sum_{k = 1}^n x_k$ is a Cauchy sequence in $X$. From completeness, the sequence $\sum_n x_n$ converges.
+
+Assume that for every sequence of vectors $x_n$ with $\sum_n \norm{x_n} < \infty$ we have that $\sum_n x_n < \infty$ in $X$. Take a Cauchy sequence $y_n$ in $X$. For each $k > 0$, there is an $N_k > 0$ such that for all $n, m > N_k$ we have that $\norm{y_n - y_m} < 2^{-k}$. Set $n_1 = N_1$ and $n_{k+1} = \max\left\{n_k, N_k\right\} + 1$. Then by definition, the it holds that $\norm{y_{n_{k+1}} - y_{n_k}} < 2^{-k}$ for al $k >0$. Define $x_k = y_{n_{k+1}} - y_{n_k}$. Then we have that $\sum_k \norm{x_k} \leq \sum_k 2^{-k} = 1$, and from our assumption the series $\sum_k x_k$ converges to some $x\in X$. We have that $\sum_{k=1}^n x_k = y_{n_{k+1}} - y_{n_1}$, therefore $y_{n_k} \to x + y_{n_1} = y$ in $X$. Now, for some $\varepsilon > 0$, take $N > 0$ such that for all $n,m > N$ we have that $\norm{y_n -y_m} < \varepsilon$. Then in particular, for large enough $k$, we have that $\norm{y_n -y_{n_k}} < \varepsilon$ and letting $k \to \infty$ we have that $\norm{y_n -y} \leq \varepsilon$. Therefore, $y_n \to y$, so $X$ is complete. 
+\end{Answer}
+
+\begin{Exercise}
+\begin{enumerate}
+\begin{item}
+Prove that in an inner product space (over $\mathbb{C}$), for all vector $x,y$ we have
+\[\inpr{x}{y} = \frac{1}{4} = \left(\norm{x + y}^2 - \norm{x - y}^2 + i \norm{x + iy}^2 - i \norm{x - iy}^2 \right) \]
+\end{item}
+\item Prove that $\left(C\left[0,1\right], \norm{\cdot}\right)$ is not an inner product space.
+\end{enumerate}
+\end{Exercise}
+
+\begin{Answer}
+\begin{enumerate}
+\begin{item}
+Take $w,z$ vectors. Then we have that:
+\[ \norm{w + z}^2 =  \inpr{w+z}{w+z} = \norm{w}^2 + \norm{z}^2 + 2\Re\inpr{w}{z} \]
+So the expression in the exercise reduces to:
+\[ 2\Re\inpr{x}{y} - 2\Re\inpr{x}{-y} + 2i\Re\inpr{x}{iy} -2i\Re\inpr{x}{-iy}\]
+Noticing that $\inpr{x}{-y} = -\inpr{x}{y}$ and that $\inpr{x}{iy} = -i\inpr{x}{y}$ we can substitute:
+\[ 2\Re\inpr{x}{y} + 2\Re\inpr{x}{y} + 2i\Im\inpr{x}{y} +2i\Im\inpr{x}{y} \]
+That is, $4\inpr{x}{y}$.
+\end{item}
+\begin{item}
+Define  the following functions in $C\left[0,1\right]$:
+
+\[
+f\left(x\right) = 
+\begin{cases}
+16x, & 0 \leq x < \frac{1}{4} \\
+16\left(\frac{1}{2} - x\right), & \frac{1}{4} \leq x < \frac{1}{2} \\
+0, & \frac{1}{2} \leq x \leq 1
+\end{cases}
+\]
+
+\[
+g\left(x\right) = 
+\begin{cases}
+0, & 0 \leq x < \frac{1}{2} \\
+16\left(x - \frac{3}{4}\right), & \frac{1}{2} \leq x < \frac{3}{4} \\
+16\left(1 - x\right), & \frac{3}{4} \leq x \leq 1
+\end{cases}
+\]
+
+These are two triangles of height $4$, the first based on $\left[0,\frac{1}{2}\right]$, the second based on $\left[\frac{1}{2}, 1\right]$.
+
+Assume by contradiction that the Parallelogram law defines an inner product on $\left(C\left[0,1\right], \norm{\cdot}_1\right)$. Then we would have that:
+\[ \inpr{f}{g} = \frac{1}{4}\left(\norm{f+g}_1^2 - \norm{f-g}_1^2 + i\norm{f + ig}_1^2 - i\norm{f - ig}_1^2\right) = 0 \]
+
+And:
+\[ \inpr{f+g}{g} = \frac{1}{4}\left(\norm{f + 2g}_1^2 - \norm{f}_1^2 + i\norm{f + \left(1 + i\right)g}_1^2- i\norm{f + \left(1 - i\right)g}_1^2\right) = 2 \]
+
+So we have that $2 = \inpr{f+g}{g} = \inpr{f}{g} + \inpr{g}{g} = 0 + 1 = 1$, which is a contradiction.
+
+\end{item}
+\end{enumerate}
+\end{Answer}
+
+\begin{Exercise}
+Let $X,Y$ be two isometric spaces. Show that if $X$ is complete then $Y$ is also complete.
+\end{Exercise}
+
+\begin{Answer} 
+Take an isometry $T:X\to Y$, and a Cauchy sequence $y_n$ in $Y$. Take $\varepsilon > 0$, and $N > 0$ such that for all $n,m > N$ we have that $\norm{y_n - y_m} < \varepsilon$. Then: 
+\[  \norm{T^{-1}y_n - T^{-1} y_m} = \norm{T^{-1}\left(y_n - y_m\right)} = \norm{y_n -y_m} < \varepsilon \]
+so $x_n = T^{-1}y_n$ is a Cauchy sequence, and since $X$ is complete, it has a limit $x \in X$. Now $\norm{y_n - Tx} = \norm{T\left(x_n - x\right)} \to 0$, so $y = Tx$ is a limit for $y_n$ in $Y$, so $Y$ is also complete. 
+\end{Answer}
+
+\begin{Exercise*}
+Let $\left\{e_r\right\}_{r\in\Lambda}$ be an uncountable orthonormal system in a Hilbert space $H$. Prove Bessel's inequality and show that for every $v\in H$ we get $\inpr{v}{e_r} \neq 0$ for at most a countable subset of $\left\{e_r\right\}_{r\in\Lambda}$
+\end{Exercise*}
+
+\begin{Answer}
+Take a finite subsuet $e_{r_1}, \dots, e_{r_n}$. Then we have that:
+\begin{equation}
+\begin{split}
+0 & \leq \norm{x - \sum_{i=1}^{n}\inpr{x}{e_{r_i}}e_{r_i}}^2 \\
+& = \inpr{x - \sum_{i=1}^{n}\inpr{x}{e_{r_i}}e_{r_i}}{x - \sum_{i=1}^{n}\inpr{x}{e_{r_i}}e_{r_i}} \\
+& = \norm{x}^2 + \norm{\sum_{i=1}^{n}\inpr{x}{e_{r_i}}e_{r_i}}^2 -2\Re\inpr{x}{\sum_{i=1}^{n}\inpr{x}{e_{r_i}}e_{r_i}} \\
+& = \norm{x}^2 + \sum_{i=1}^n\abs{\inpr{x}{e_{r_i}}}^2 -2\Re\sum_{i=1}^{n}\abs{\inpr{x}{e_{r_i}}}^2 \\
+& = \norm{x}^2 - \sum_{i=1}^{n}\abs{\inpr{x}{e_{r_i}}}^2
+\end{split}
+\end{equation}
+
+Now, consider $s = \sup \left\{\sum_{i=1}^{n}\abs{\inpr{x}{e_{r_i}}}^2:r_1,\dots,r_n \in \Lambda\right\} = \sup S$. We know that $s \leq \norm{x}^2$, so it's finite. Take a sequence $s_n \in S$ with $s_n \nearrow s$. Then we can take finite subsets $I_n \subset \Lambda$ with $s_n = \sum_{r\in I_n}\abs{\inpr{x}{e_r}}^2$. Consider $I = \bigcup_{n=1}^{\infty} I_n$. It's at most countable, as a countable union of finite sets. Suppose $\abs{\inpr{x}{e_{r^\prime}}} \neq 0$ for some $r^\prime \notin I$. Set $I_n^\prime = I_n \cup \left\{r^\prime\right\}$. So $s_n^\prime = \sum_{r\in I_n^\prime}\abs{\inpr{x}{e_r}}^2 = s_n + \abs{\inpr{x}{e_{r^\prime}}}^2$. So $s_n^\prime = s_n + \abs{\inpr{x}{e_{r^\prime}}}^2 \nearrow s + \abs{\inpr{x}{e_{r^\prime}}}^2 > s$, which is a contradiction, by the definition of $s$.
+
+So the set of $r$ for which $\abs{\inpr{x}{e_{r^\prime}}}^2$ is at most a countable subset of $\Lambda$.
+\end{Answer}
+
+\begin{Exercise}
+Let $H$ be a Hilbert space, $\left\{v_n\right\}_n$ a sequence of linearly independent vectors. Assume that $\sum_na_n v_n= 0$. Prove or Disprove: $a_n= 0$ for every $n$.
+\end{Exercise}
+
+\begin{Answer}
+Consider the following example: $v_1 = \frac{1}{2}e_2$, $v_n = -\frac{1}{n}e_n + \frac{1}{n+1}e_{n+1}$ for $n>1$ in $\ell_2$. Then $\left\{v_n\right\}_n$ is a sequence on linearly independent vectors, but $\sum_{k=1}^{n}v_n = \frac{1}{n+1}e_{n+1} \to 0$ when $n\to \infty$.
+\end{Answer}
+
+\end{document}
